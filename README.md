@@ -9,30 +9,6 @@ Este proyecto se centra en el análisis de un conjunto de datos de registros de 
 
 ---
 
-## Estructura del Proyecto
-
-El proyecto está dividido en los siguientes módulos con el propósito de resolver las diferentes actividades:
-
-1. **Carga y Limpieza de Datos (`cargar_data.py`)**
-   - Clase `cargar_data`: Permite cargar datos desde archivos CSV, limpiar valores nulos y duplicados, y detectar valores atípicos (outliers) en columnas específicas.
-
-2. **Análisis Exploratorio (`analisis_exp.py`)**
-   - Clase `ExploratoryAnalysis`: Incluye métodos para calcular promedios de valoraciones, contar reseñas y valoraciones totales, y determinar los autores y categorías más populares.
-
-3. **Análisis de Sentimientos (`analisis_NLP.py`)**
-   - Clase `SentimentAnalysis`: Proporciona herramientas para preprocesar textos de reseñas, calcular puntajes de sentimientos usando TextBlob y agrupar el promedio de sentimientos por libros o categorías.
-
-4. **Análisis de Libros Principales (`top_libros.py`)**
-   - Clase `TopBooksAnalysis`: Identifica los libros más reseñados, mejor valorados por promedio de puntuación y por sentimientos.
-
-5. **Visualización de Datos (`visualizacion.py`)**
-   - Clase `DataVisualization`: Genera gráficos utilizando Matplotlib y Seaborn para mostrar los libros más reseñados, autores más populares, distribución de sentimientos y más.
-
-6. **Archivo Principal (`main.py`)**
-   - Integra todas las funcionalidades de los módulos anteriores y permite la ejecución completa del flujo de análisis.
-
----
-
 Requisitos Previos
 
 1. Crear un Ambiente Virtual
@@ -54,6 +30,10 @@ pip install -r requirements.txt
 Los archivos CSV descargados desde Kaggle ejecutando (`download_df.py`), módulo encargado de descargar las bases de datos de Kaggle por primera vez en la ubicación:
 
 data/raw/
+
+```bash
+python download_df.py
+```
 
 El archivo de registros de transacciones, información del consumidor y datos de cartas se llaman: `transactions_data.csv`, `users_data.csv` y `cards_data.csv`, respectivamente.
 ---
@@ -134,25 +114,3 @@ Este archivo realiza las siguientes acciones:
 ```
 
 ---
-
-
-El modelo actual no es bueno.
-Está muy lejos de ser usable para predicciones confiables de total_spent.
-
-🧩 ¿Por qué puede estar fallando?
-1. Variables no predictivas
-Muchas de las variables (como birth_year, num_credit_cards, etc.) no capturan bien el patrón de gasto por cliente y MCC.
-
-2. Ruido en los datos
-Columnas como amount y credit_limit fueron limpiadas desde formatos corruptos, lo que puede haber introducido error.
-
-3. Falta de features relevantes
-Tal vez el comportamiento de gasto depende de más variables no disponibles:
-
-Historial de transacciones (series de tiempo).
-
-Localización del cliente.
-
-Tipo de comercio asociado al MCC (algunas categorías gastan más por naturaleza).
-
-Tiempo (estacionalidad: mes, día de semana, etc.).

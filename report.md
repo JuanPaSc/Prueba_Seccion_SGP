@@ -39,20 +39,38 @@ Se utilizó un modelo LightGBM de aprendizaje automático y regresión por su ef
 | RMSE Relativo       | 322.83%       |
 
 > 🟡 El modelo explica solo el 22% de la varianza del gasto total. El error medio supera 3 veces el promedio real, indicando que el modelo es débil para predicción. Podría estar fallando el modelo por capturar variables que no representan de buena forma el gasto por cliente y MCC.
-> Al realizarse la limpieza de datos se pudo alterar las columnas de forma no deseada o simplemente, falta de columnas relevantes para entrenar el modelo.
 
 ---
 
 
 ## 📌 Conclusiones
 
-- El modelo **no es suficientemente preciso** para tareas de predicción individual.
+- El modelo **no es suficientemente preciso** para tareas de predicción individual de total_spent.
 - Variables como ingresos y edad explican parcialmente el comportamiento, pero no capturan toda la dinámica de gasto.
 - Podría existir **información importante no disponible en la base de datos**, como:
   - Tiempo (estacionalidad)
   - Tipo de comercio (detalle de MCC)
   - Frecuencia y recencia de gasto
 
+
+## 🧩 ¿Por qué puede estar fallando?
+1. Variables no predictivas
+Muchas de las variables (como birth_year, num_credit_cards, etc.) no capturan bien el patrón de gasto por cliente y MCC.
+
+2. Ruido en los datos
+Columnas como amount y credit_limit fueron limpiadas desde formatos corruptos, lo que puede haber introducido error.
+
+3. Falta de features relevantes
+
+Se intuye que el comportamiento de gasto depende de más variables no disponibles:
+
+- Historial de transacciones (series de tiempo).
+
+- Localización del cliente.
+
+- Tipo de comercio asociado al MCC (algunas categorías gastan más por naturaleza).
+
+- Tiempo (estacionalidad: mes, día de semana, etc.).
 ---
 
 ## 🔁 Recomendaciones y Próximos Pasos
